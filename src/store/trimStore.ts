@@ -22,6 +22,8 @@ interface TrimStore {
   setAudioBuffer: (buf: AudioBuffer) => void
   setStatus: (status: AppStatus, error?: string) => void
   reset: () => void
+  setTrimStart: (n: number) => void
+  setTrimEnd: (n: number) => void
 }
 
 export const useTrimStore = create<TrimStore>((set) => ({
@@ -50,4 +52,8 @@ export const useTrimStore = create<TrimStore>((set) => ({
       trimEnd: 0,
       outputBlob: null,
     }),
+  setTrimStart: (n) =>
+    set((s) => ({ trimStart: Math.max(0, Math.min(n, s.trimEnd - 0.01)) })),
+  setTrimEnd: (n) =>
+    set((s) => ({ trimEnd: Math.max(s.trimStart + 0.01, Math.min(n, s.duration)) })),
 }))
