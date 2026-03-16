@@ -80,7 +80,11 @@ Plans:
   3. App displays the original file size and the trimmed file size after processing; both values are accurate
   4. While the user is dragging handles, the estimated output size updates in real time without triggering a trim operation
   5. If trim processing fails (e.g., corrupt file, WASM crash), the user sees an error message and the app remains usable without a page reload
-**Plans:** TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Data layer: trimAudio service, store extensions (isProcessing, clearOutput), formatBytes utility with tests
+- [ ] 04-02-PLAN.md — UI: TrimActions component (trim button, size display, download), App.tsx integration, browser verification
 
 ---
 
@@ -91,7 +95,7 @@ Plans:
 | 1. Foundation | 2/2 | Complete    | 2026-03-16 |
 | 2. File Load and Waveform | 2/2 | Complete    | 2026-03-16 |
 | 3. Trim Interaction | 2/2 | Complete    | 2026-03-16 |
-| 4. Trim Execution and Download | 0/? | Not started | - |
+| 4. Trim Execution and Download | 0/2 | In progress | - |
 
 ---
 
@@ -119,4 +123,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-03-16*
-*Last updated: 2026-03-16 after Phase 3 completion (03-02-PLAN.md complete)*
+*Last updated: 2026-03-17 after Phase 4 planning (2 plans created)*
