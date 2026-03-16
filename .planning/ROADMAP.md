@@ -66,7 +66,7 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Store trim actions + WaveformView Regions plugin with bidirectional sync
+- [x] 03-01-PLAN.md — Store trim actions + WaveformView Regions plugin with bidirectional sync
 - [ ] 03-02-PLAN.md — TrimControls numeric inputs with keyboard nudge + App integration
 
 ### Phase 4: Trim Execution and Download
@@ -90,7 +90,7 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete    | 2026-03-16 |
 | 2. File Load and Waveform | 2/2 | Complete    | 2026-03-16 |
-| 3. Trim Interaction | 0/2 | In progress | - |
+| 3. Trim Interaction | 1/2 | In progress | - |
 | 4. Trim Execution and Download | 0/? | Not started | - |
 
 ---
