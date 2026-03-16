@@ -136,3 +136,83 @@
   margin: 4px 0 0;
   line-height: 1.4;
 }
+
+/* Phase 4: Trim Actions */
+.trim-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-top: 16px;
+}
+
+.trim-button {
+  display: inline-block;
+  padding: 0 24px;
+  height: 40px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 40px;
+  user-select: none;
+}
+
+.trim-button:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.trim-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.size-estimate {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.output-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.size-comparison {
+  font-size: 14px;
+  color: var(--text-h);
+  line-height: 1.5;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 0 24px;
+  height: 40px;
+  background: var(--code-bg);
+  color: var(--text-h);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 40px;
+  user-select: none;
+}
+
+.download-button:hover {
+  background: var(--bg);
+}
+
+.file-sep {
+  color: var(--border);
+}
