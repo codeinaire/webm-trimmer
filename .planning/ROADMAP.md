@@ -30,7 +30,7 @@
   2. ffmpeg.wasm loads and executes a basic command in a local browser tab (Chrome, Firefox, Safari) without a server
   3. The Vite + React + TypeScript project builds and serves locally with the mandatory `optimizeDeps.exclude` config in place
   4. The single-threaded WASM core is selected (or multi-threaded justified with documented header plan), and that decision is recorded in PROJECT.md
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] 01-01-PLAN.md — Scaffold Vite + React + TS project with ffmpeg.wasm verified working in browser
@@ -80,7 +80,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/2 | Planning complete | - |
+| 1. Foundation | 1/2 | In Progress|  |
 | 2. File Load and Waveform | 0/? | Not started | - |
 | 3. Trim Interaction | 0/? | Not started | - |
 | 4. Trim Execution and Download | 0/? | Not started | - |

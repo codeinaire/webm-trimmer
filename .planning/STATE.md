@@ -14,20 +14,20 @@
 ## Current Position
 
 **Phase:** 1 — Foundation
-**Plan:** None started
-**Status:** Not started
-**Last Action:** Roadmap created
+**Plan:** 01 complete (01-01-PLAN.md)
+**Status:** In progress
+**Last Action:** Completed plan 01-01 — Vite scaffold + ffmpeg.wasm smoke test
 
 ### Progress Bar
 
 ```
-Phase 1 [----------] 0%
+Phase 1 [##--------] 20%
 Phase 2 [----------] 0%
 Phase 3 [----------] 0%
 Phase 4 [----------] 0%
 ```
 
-**Overall:** 0/4 phases complete
+**Overall:** 0/4 phases complete (Phase 1 in progress: 1/1 plans done)
 
 ---
 
@@ -38,9 +38,9 @@ Phase 4 [----------] 0%
 | Phases total | 4 |
 | Phases complete | 0 |
 | Requirements total | 14 |
-| Requirements done | 0 |
-| Plans written | 0 |
-| Plans complete | 0 |
+| Requirements done | 2 |
+| Plans written | 1 |
+| Plans complete | 1 |
 
 ---
 
@@ -51,9 +51,10 @@ Phase 4 [----------] 0%
 | Decision | Rationale | Status |
 |----------|-----------|--------|
 | Client-side only (no server) | Privacy, simplicity, no hosting costs | Confirmed in requirements |
-| Single-threaded ffmpeg.wasm core | Avoids COOP/COEP header requirement; deploys to any static host | Pending Phase 1 confirmation |
-| WebP or WebM output format | Actual container format of input files is unconfirmed | Must resolve in Phase 1 |
-| React 19 + TypeScript + Vite 8 | Research-validated stack; Vite 8 required for WASM support | Pending Phase 1 scaffold |
+| Single-threaded ffmpeg.wasm core | Avoids COOP/COEP header requirement; deploys to any static host | Confirmed — @ffmpeg/core@0.12.10 installed |
+| WebP or WebM output format | Actual container format of input files is unconfirmed | Must resolve in Phase 1 (ffprobe on real file) |
+| Vite 6.4.1 + React 19 + TypeScript | Vite 8 requires Node 20.19+; system has 20.16.0; Vite 6 fully functional | Confirmed in 01-01 execution |
+| @ffmpeg/util@0.12.2 (not 0.12.10) | npm registry only has util versions up to 0.12.2; plan had incorrect version | Confirmed in 01-01 execution |
 | wavesurfer.js v7 + Regions plugin | Provides drag handles out of the box; Web Audio API for waveform decode | Pending Phase 2 |
 | Zustand for trim state | Single source of truth prevents bidirectional sync bugs | Pending Phase 2 scaffold |
 
@@ -68,7 +69,7 @@ Phase 4 [----------] 0%
 
 - Two-decode strategy: Web Audio API decodes for waveform display immediately; ffmpeg.wasm decodes only at trim time
 - WaveSurfer is write-only for state purposes: region events push to Zustand store; all other components read from store
-- ffmpeg service must be a singleton with an `ensureLoaded` guard
+- ffmpeg service is a singleton (`src/services/ffmpeg.ts`) with `ensureLoaded` guard — CONFIRMED WORKING
 - VFS cleanup (`deleteFile`) and Blob URL cleanup (`revokeObjectURL`) are required in the trim function
 
 ### Open Questions
@@ -86,7 +87,7 @@ Phase 4 [----------] 0%
 
 ### Blockers
 
-None currently. Phase 1 is ready to start.
+None. Phase 1 plan 01-01 complete. Next: browser smoke test confirmation (visit localhost:5173 and click button).
 
 ---
 
@@ -96,11 +97,11 @@ None currently. Phase 1 is ready to start.
 1. `.planning/STATE.md` (this file) — current position and context
 2. `.planning/ROADMAP.md` — phase goals and success criteria
 3. `.planning/REQUIREMENTS.md` — full requirement list with traceability
-4. `.planning/research/SUMMARY.md` — stack decisions and architecture rationale
+4. `.planning/phases/01-foundation/01-01-SUMMARY.md` — plan 01 execution summary
 
-**Current phase plan location:** `.planning/plans/phase-1/` (not yet created)
+**Current phase plan location:** `.planning/phases/01-foundation/`
 
 ---
 
 *State initialized: 2026-03-16*
-*Last updated: 2026-03-16 after roadmap creation*
+*Last updated: 2026-03-16 after completing 01-01-PLAN.md (scaffold + ffmpeg.wasm)*

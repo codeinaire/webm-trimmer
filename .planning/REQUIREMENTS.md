@@ -33,8 +33,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: All processing runs client-side (no server, no uploads)
-- [ ] **INFRA-02**: App works in modern browsers (Chrome, Firefox, Safari)
+- [x] **INFRA-01**: All processing runs client-side (no server, no uploads)
+- [x] **INFRA-02**: App works in modern browsers (Chrome, Firefox, Safari)
 
 ## v2 Requirements
 
@@ -71,8 +71,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 1 | Pending |
-| INFRA-02 | Phase 1 | Pending |
+| INFRA-01 | Phase 1 | Complete |
+| INFRA-02 | Phase 1 | Complete |
 | LOAD-01 | Phase 2 | Pending |
 | FMT-01 | Phase 2 | Pending |
 | FMT-02 | Phase 2 | Pending |
