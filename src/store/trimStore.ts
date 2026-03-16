@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type AppStatus = 'idle' | 'decoding' | 'ready' | 'error'
+type AppStatus = 'idle' | 'decoding' | 'ready' | 'trimming' | 'error'
 
 interface TrimStore {
   // Phase 2 fields
@@ -14,8 +14,10 @@ interface TrimStore {
   trimStart: number
   trimEnd: number
 
-  // Phase 4 stubs
+  // Phase 4 fields
   outputBlob: Blob | null
+  isProcessing: boolean
+  trimProgress: number
 
   // Actions
   setFile: (file: File) => void
@@ -24,6 +26,10 @@ interface TrimStore {
   reset: () => void
   setTrimStart: (n: number) => void
   setTrimEnd: (n: number) => void
+  setOutputBlob: (blob: Blob) => void
+  clearOutput: () => void
+  setIsProcessing: (v: boolean) => void
+  setTrimProgress: (v: number) => void
 }
 
 export const useTrimStore = create<TrimStore>((set) => ({
@@ -35,6 +41,8 @@ export const useTrimStore = create<TrimStore>((set) => ({
   trimStart: 0,
   trimEnd: 0,
   outputBlob: null,
+  isProcessing: false,
+  trimProgress: 0,
 
   setFile: (file) => set({ file, status: 'decoding', errorMessage: null }),
   setAudioBuffer: (buf) =>
@@ -51,9 +59,21 @@ export const useTrimStore = create<TrimStore>((set) => ({
       trimStart: 0,
       trimEnd: 0,
       outputBlob: null,
+      isProcessing: false,
+      trimProgress: 0,
     }),
   setTrimStart: (n) =>
-    set((s) => ({ trimStart: Math.max(0, Math.min(n, s.trimEnd - 0.01)) })),
+    set((s) => ({
+      trimStart: Math.max(0, Math.min(n, s.trimEnd - 0.01)),
+      outputBlob: null,
+    })),
   setTrimEnd: (n) =>
-    set((s) => ({ trimEnd: Math.max(s.trimStart + 0.01, Math.min(n, s.duration)) })),
+    set((s) => ({
+      trimEnd: Math.max(s.trimStart + 0.01, Math.min(n, s.duration)),
+      outputBlob: null,
+    })),
+  setOutputBlob: (blob) => set({ outputBlob: blob }),
+  clearOutput: () => set({ outputBlob: null, trimProgress: 0 }),
+  setIsProcessing: (v) => set({ isProcessing: v }),
+  setTrimProgress: (v) => set({ trimProgress: v }),
 }))
