@@ -1,6 +1,7 @@
 import { useTrimStore } from './store/trimStore'
 import { FileLoader } from './components/FileLoader'
 import { WaveformView } from './components/WaveformView'
+import { TrimControls } from './components/TrimControls'
 import './App.css'
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
       )}
 
       <WaveformView />
+
+      {status === 'ready' && <TrimControls />}
     </div>
   )
 }
