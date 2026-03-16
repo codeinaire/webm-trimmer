@@ -14,20 +14,20 @@
 ## Current Position
 
 **Phase:** 1 — Foundation
-**Plan:** 01 complete (01-01-PLAN.md)
+**Plan:** 02 complete (01-02-PLAN.md)
 **Status:** In progress
-**Last Action:** Completed plan 01-01 — Vite scaffold + ffmpeg.wasm smoke test
+**Last Action:** Completed plan 01-02 — ffprobe format validation; WebM/Opus confirmed
 
 ### Progress Bar
 
 ```
-Phase 1 [##--------] 20%
+Phase 1 [####------] 40%
 Phase 2 [----------] 0%
 Phase 3 [----------] 0%
 Phase 4 [----------] 0%
 ```
 
-**Overall:** 0/4 phases complete (Phase 1 in progress: 1/1 plans done)
+**Overall:** 0/4 phases complete (Phase 1 in progress: 2/2 foundation plans done)
 
 ---
 
@@ -52,7 +52,8 @@ Phase 4 [----------] 0%
 |----------|-----------|--------|
 | Client-side only (no server) | Privacy, simplicity, no hosting costs | Confirmed in requirements |
 | Single-threaded ffmpeg.wasm core | Avoids COOP/COEP header requirement; deploys to any static host | Confirmed — @ffmpeg/core@0.12.10 installed |
-| WebP or WebM output format | Actual container format of input files is unconfirmed | Must resolve in Phase 1 (ffprobe on real file) |
+| Container format: WebM (not WebP) | ffprobe: `format_name=matroska,webm`; magic bytes `1a 45 df a3` (EBML). Input sample encoded by Chrome. Output: `.webm`, `audio/webm`. | Confirmed in Phase 1 |
+| Audio codec: Opus | ffprobe: `codec_name=opus`, 48000 Hz mono. ffmpeg flag: `-c:a libopus` | Confirmed in Phase 1 |
 | Vite 6.4.1 + React 19 + TypeScript | Vite 8 requires Node 20.19+; system has 20.16.0; Vite 6 fully functional | Confirmed in 01-01 execution |
 | @ffmpeg/util@0.12.2 (not 0.12.10) | npm registry only has util versions up to 0.12.2; plan had incorrect version | Confirmed in 01-01 execution |
 | wavesurfer.js v7 + Regions plugin | Provides drag handles out of the box; Web Audio API for waveform decode | Pending Phase 2 |
@@ -74,16 +75,16 @@ Phase 4 [----------] 0%
 
 ### Open Questions
 
-1. Are input files true WebP containers with non-standard audio, or WebM containers with a `.webp` extension? (Resolve in Phase 1)
-2. Where will the app be deployed? (Affects single-threaded vs multi-threaded WASM core choice)
-3. What audio codec do the input files use — Opus or Vorbis? (Determines ffmpeg `-c:a` flag)
+1. ~~Are input files true WebP containers with non-standard audio, or WebM containers with a `.webp` extension?~~ **RESOLVED (Phase 1):** Files are WebM containers (`matroska,webm`) with `.webm` extension. Not WebP. EBML magic bytes confirmed.
+2. Where will the app be deployed? (Affects single-threaded vs multi-threaded WASM core choice) — Local only per user constraints; single-threaded confirmed.
+3. ~~What audio codec do the input files use — Opus or Vorbis?~~ **RESOLVED (Phase 1):** Codec is `opus` (Opus Interactive Audio Codec), 48000 Hz mono, encoder=Chrome. ffmpeg flag: `-c:a libopus`.
 
 ### Todos
 
-- [ ] Run `ffprobe` on real input files to confirm container format
-- [ ] Decide and document production deployment target
-- [ ] Update PROJECT.md Key Decisions table after Phase 1 spike findings
-- [ ] If files are WebM, update OUT-01 requirement to reflect `.webm` output
+- [x] Run `ffprobe` on real input files to confirm container format — DONE: WebM/Opus confirmed
+- [ ] Decide and document production deployment target (local-only per constraints; low priority)
+- [x] Update PROJECT.md Key Decisions table after Phase 1 spike findings — DONE in Plan 01-02
+- [ ] Update OUT-01 requirement to reflect `.webm` output (files are WebM, not WebP)
 
 ### Blockers
 
@@ -104,4 +105,4 @@ None. Phase 1 plan 01-01 complete. Next: browser smoke test confirmation (visit 
 ---
 
 *State initialized: 2026-03-16*
-*Last updated: 2026-03-16 after completing 01-01-PLAN.md (scaffold + ffmpeg.wasm)*
+*Last updated: 2026-03-16 after completing 01-02-PLAN.md (ffprobe format validation — WebM/Opus confirmed)*
