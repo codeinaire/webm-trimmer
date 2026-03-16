@@ -11,7 +11,7 @@
 
 ## Phases
 
-- [ ] **Phase 1: Foundation** - Confirm file format, scaffold project, verify WASM runs in-browser
+- [x] **Phase 1: Foundation** - Confirm file format, scaffold project, verify WASM runs in-browser (completed 2026-03-16)
 - [ ] **Phase 2: File Load and Waveform** - User can load a file and see its audio waveform with format validation
 - [ ] **Phase 3: Trim Interaction** - User can set precise trim points via draggable handles and numeric inputs
 - [ ] **Phase 4: Trim Execution and Download** - User can trim and download the file with size feedback
@@ -30,7 +30,7 @@
   2. ffmpeg.wasm loads and executes a basic command in a local browser tab (Chrome, Firefox, Safari) without a server
   3. The Vite + React + TypeScript project builds and serves locally with the mandatory `optimizeDeps.exclude` config in place
   4. The single-threaded WASM core is selected (or multi-threaded justified with documented header plan), and that decision is recorded in PROJECT.md
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [ ] 01-01-PLAN.md — Scaffold Vite + React + TS project with ffmpeg.wasm verified working in browser
@@ -80,7 +80,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 1/2 | In Progress|  |
+| 1. Foundation | 2/2 | Complete   | 2026-03-16 |
 | 2. File Load and Waveform | 0/? | Not started | - |
 | 3. Trim Interaction | 0/? | Not started | - |
 | 4. Trim Execution and Download | 0/? | Not started | - |
