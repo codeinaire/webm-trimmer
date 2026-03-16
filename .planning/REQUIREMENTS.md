@@ -26,10 +26,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Output & Download
 
-- [ ] **OUT-01**: User can download the trimmed file as WebP
-- [ ] **OUT-02**: App displays file size before and after trimming
-- [ ] **OUT-03**: App shows real-time estimated output size as handles are dragged
-- [ ] **OUT-04**: App shows progress indicator during WASM load and trim operations
+- [x] **OUT-01**: User can download the trimmed file as WebP
+- [x] **OUT-02**: App displays file size before and after trimming
+- [x] **OUT-03**: App shows real-time estimated output size as handles are dragged
+- [x] **OUT-04**: App shows progress indicator during WASM load and trim operations
 
 ### Infrastructure
 
@@ -81,10 +81,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | WAVE-03 | Phase 3 | Complete |
 | WAVE-04 | Phase 3 | Complete |
 | WAVE-05 | Phase 3 | Complete |
-| OUT-01 | Phase 4 | Pending |
-| OUT-02 | Phase 4 | Pending |
-| OUT-03 | Phase 4 | Pending |
-| OUT-04 | Phase 4 | Pending |
+| OUT-01 | Phase 4 | Complete |
+| OUT-02 | Phase 4 | Complete |
+| OUT-03 | Phase 4 | Complete |
+| OUT-04 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 14 total

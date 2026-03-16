@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-last_updated: "2026-03-16T08:52:16.123Z"
+last_updated: "2026-03-16T23:26:26.258Z"
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 8
+  completed_plans: 7
 ---
 
 # Project State: WebP Trimmer
@@ -20,16 +20,16 @@ progress:
 ## Project Reference
 
 **Core Value:** Users can quickly trim the duration of a WebP audio file in the browser and save a smaller version without leaving the page or uploading to a server.
-**Current Focus:** Phase 3 — Trim Interaction
+**Current Focus:** Phase 4 — Trim Execution and Download
 
 ---
 
 ## Current Position
 
-**Phase:** 3 — Trim Interaction
-**Plan:** 02 complete (03-02-PLAN.md) — all 3 tasks done, browser verification approved
-**Status:** Ready to plan
-**Last Action:** Completed plan 03-02 — TrimControls numeric inputs (Cut from start / Cut from end), Shift+Arrow keyboard nudge, CSS styles, rendered in App.tsx; browser verification approved
+**Phase:** 4 — Trim Execution and Download
+**Plan:** 01 complete (04-01-PLAN.md) — all 3 tasks done, 19 tests passing, build green
+**Status:** Ready to execute Plan 02
+**Last Action:** Completed plan 04-01 — trimAudio() service function with VFS cleanup, extended trimStore with isProcessing/trimProgress/setOutputBlob/clearOutput, formatBytes utility; all with passing vitest unit tests
 
 ### Progress Bar
 
@@ -37,10 +37,10 @@ progress:
 Phase 1 [####------] 40%
 Phase 2 [##########] 100%
 Phase 3 [##########] 100%
-Phase 4 [----------] 0%
+Phase 4 [█████░░░░░] 50%
 ```
 
-**Overall:** 2/4 phases complete (Phase 3 done: 2/2 trim-interaction plans done; Phase 4 next)
+**Overall:** 3/4 phases in progress (Phase 4 in progress: 1/2 trim-execution plans done)
 
 ---
 
@@ -59,6 +59,7 @@ Phase 4 [----------] 0%
 | Phase 01-foundation P02 | 15 | 2 tasks | 2 files |
 | Phase 02-file-load-and-waveform P01 | 10 | 2 tasks | 3 files |
 | Phase 03-trim-interaction P01 | 3 | 2 tasks | 3 files |
+| Phase 04-trim-execution-and-download P01 | 2 | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,9 @@ Phase 4 [----------] 0%
 | isSyncingFromStore ref guard | Prevents infinite loop between region-updated event and setOptions call in bidirectional sync | Confirmed Phase 3 — pattern from research docs |
 | cutFromEnd = duration - trimEnd | User-facing "cut from end" derived from absolute trimEnd store value; converts back on onChange | Confirmed Phase 3 Plan 02 — keeps UI semantics decoupled from store |
 | Two-tier keyboard nudge | Plain arrow key (0.1s) via native step attribute; Shift+Arrow (1.0s) via custom onKeyDown handler | Confirmed Phase 3 Plan 02 |
+| vi.hoisted() for vi.mock factory | vitest hoists vi.mock above const declarations; vi.hoisted() makes variables available in factory scope | Confirmed Phase 4 Plan 01 |
+| Blob from data.buffer as ArrayBuffer | ffmpeg.readFile() returns Uint8Array<ArrayBufferLike>; extracting .buffer and casting to ArrayBuffer satisfies TypeScript BlobPart strict typing | Confirmed Phase 4 Plan 01 |
+| progressHandler as named const | Same reference passed to ffmpeg.on and ffmpeg.off prevents ghost handlers on repeated trims | Confirmed Phase 4 Plan 01 |
 
 ### Critical Risks
 
@@ -108,7 +112,7 @@ Phase 4 [----------] 0%
 
 ### Blockers
 
-None. Phase 3 complete. Next: Phase 4 export and trim.
+None. Phase 4 Plan 01 complete. Next: Phase 4 Plan 02 — TrimActions UI component.
 
 ---
 
@@ -120,9 +124,9 @@ None. Phase 3 complete. Next: Phase 4 export and trim.
 3. `.planning/REQUIREMENTS.md` — full requirement list with traceability
 4. `.planning/phases/01-foundation/01-01-SUMMARY.md` — plan 01 execution summary
 
-**Current phase plan location:** `.planning/phases/03-trim-interaction/`
+**Current phase plan location:** `.planning/phases/04-trim-execution-and-download/`
 
 ---
 
 *State initialized: 2026-03-16*
-*Last updated: 2026-03-16 after completing 03-02-PLAN.md (TrimControls numeric inputs, Shift+Arrow nudge, CSS styles — browser verification approved; Phase 3 complete)*
+*Last updated: 2026-03-17 after completing 04-01-PLAN.md (trimAudio service, extended trimStore, formatBytes utility — 19 tests passing, build green)*
