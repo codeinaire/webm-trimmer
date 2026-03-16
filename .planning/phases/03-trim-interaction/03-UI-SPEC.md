@@ -56,12 +56,13 @@ Exceptions:
 | Body | 16px | 400 | 1.5 |
 | Label | 14px | 500 | 1.4 |
 | Heading | 24px | 500 | 1.18 |
-| Display | not used in this phase | — | — |
+| Hint | 12px | 400 | 1.4 |
 
 Notes:
 - Root font is 18px in `index.css` (desktop) / 16px (≤1024px). Phase 3 controls use 14px labels and 16px input values for compact layout — within the established scale.
 - Weight 500 matches the existing `h1`/`h2` weight in `index.css`. No new weights introduced.
 - Numeric inputs display values at 16px weight 400 (body role), using `font-variant-numeric: tabular-nums` to prevent layout shift as digits change.
+- Hint role (12px weight 400) is used exclusively for `.trim-hint` — the keyboard shortcut reminder below the inputs.
 
 **Source:** index.css establishes `font: 18px/145%` and h2 at 24px/weight 500. Phase 3 stays within these bounds.
 
@@ -172,7 +173,7 @@ CSS classes to add to `App.css`:
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 8px 12px;
+  padding: 8px 16px;
   min-height: 40px;
   width: 120px;
   box-sizing: border-box;
@@ -234,6 +235,8 @@ Region color: `rgba(74, 158, 255, 0.15)` (translucent fill, handled by Regions p
 ---
 
 ## Layout Placement
+
+The waveform region (WaveformView) is the primary visual anchor of Phase 3. It occupies the full available width and establishes the spatial metaphor for the trim operation. TrimControls is a subordinate element that appears below the waveform and reflects its state numerically — it does not compete with the waveform for visual focus.
 
 TrimControls renders directly below the waveform container, separated by 16px margin. App.tsx render order:
 
