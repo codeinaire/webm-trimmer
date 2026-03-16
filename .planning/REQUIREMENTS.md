@@ -71,26 +71,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FMT-01 | — | Pending |
-| FMT-02 | — | Pending |
-| LOAD-01 | — | Pending |
-| WAVE-01 | — | Pending |
-| WAVE-02 | — | Pending |
-| WAVE-03 | — | Pending |
-| WAVE-04 | — | Pending |
-| WAVE-05 | — | Pending |
-| OUT-01 | — | Pending |
-| OUT-02 | — | Pending |
-| OUT-03 | — | Pending |
-| OUT-04 | — | Pending |
-| INFRA-01 | — | Pending |
-| INFRA-02 | — | Pending |
+| INFRA-01 | Phase 1 | Pending |
+| INFRA-02 | Phase 1 | Pending |
+| LOAD-01 | Phase 2 | Pending |
+| FMT-01 | Phase 2 | Pending |
+| FMT-02 | Phase 2 | Pending |
+| WAVE-01 | Phase 2 | Pending |
+| WAVE-02 | Phase 3 | Pending |
+| WAVE-03 | Phase 3 | Pending |
+| WAVE-04 | Phase 3 | Pending |
+| WAVE-05 | Phase 3 | Pending |
+| OUT-01 | Phase 4 | Pending |
+| OUT-02 | Phase 4 | Pending |
+| OUT-03 | Phase 4 | Pending |
+| OUT-04 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 14 total
-- Mapped to phases: 0
-- Unmapped: 14 ⚠️
+- Mapped to phases: 14
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-16*
-*Last updated: 2026-03-16 after initial definition*
+*Last updated: 2026-03-16 after roadmap creation — traceability complete*
