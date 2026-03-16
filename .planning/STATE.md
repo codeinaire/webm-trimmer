@@ -27,20 +27,20 @@ progress:
 ## Current Position
 
 **Phase:** 3 — Trim Interaction
-**Plan:** 01 complete (03-01-PLAN.md) — all 2 tasks done, build passes
-**Status:** In progress (03-02 next)
-**Last Action:** Completed plan 03-01 — setTrimStart/setTrimEnd store actions with clamping, WaveformView RegionsPlugin with bidirectional sync, Vite alias for wavesurfer.js 7.12.3 regions plugin
+**Plan:** 02 complete (03-02-PLAN.md) — all 3 tasks done, browser verification approved
+**Status:** Phase 3 complete — all 2 plans done; Phase 4 next
+**Last Action:** Completed plan 03-02 — TrimControls numeric inputs (Cut from start / Cut from end), Shift+Arrow keyboard nudge, CSS styles, rendered in App.tsx; browser verification approved
 
 ### Progress Bar
 
 ```
 Phase 1 [####------] 40%
 Phase 2 [##########] 100%
-Phase 3 [####------] 40%
+Phase 3 [##########] 100%
 Phase 4 [----------] 0%
 ```
 
-**Overall:** 1/4 phases complete (Phase 3 in progress: 1/2 trim-interaction plans done)
+**Overall:** 2/4 phases complete (Phase 3 done: 2/2 trim-interaction plans done; Phase 4 next)
 
 ---
 
@@ -76,6 +76,8 @@ Phase 4 [----------] 0%
 | Zustand for trim state | Single source of truth prevents bidirectional sync bugs | Confirmed Phase 2 — FileLoader/WaveformView both read from useTrimStore |
 | Vite alias for wavesurfer.js regions plugin | wavesurfer.js 7.12.3 exports map references regions.esm.js/.cjs that do not exist; alias to regions.js (already ESM) bypasses broken exports | Confirmed Phase 3 — build passes |
 | isSyncingFromStore ref guard | Prevents infinite loop between region-updated event and setOptions call in bidirectional sync | Confirmed Phase 3 — pattern from research docs |
+| cutFromEnd = duration - trimEnd | User-facing "cut from end" derived from absolute trimEnd store value; converts back on onChange | Confirmed Phase 3 Plan 02 — keeps UI semantics decoupled from store |
+| Two-tier keyboard nudge | Plain arrow key (0.1s) via native step attribute; Shift+Arrow (1.0s) via custom onKeyDown handler | Confirmed Phase 3 Plan 02 |
 
 ### Critical Risks
 
@@ -106,7 +108,7 @@ Phase 4 [----------] 0%
 
 ### Blockers
 
-None. 03-01 build passes. Next: 03-02 TrimControls numeric inputs.
+None. Phase 3 complete. Next: Phase 4 export and trim.
 
 ---
 
@@ -123,4 +125,4 @@ None. 03-01 build passes. Next: 03-02 TrimControls numeric inputs.
 ---
 
 *State initialized: 2026-03-16*
-*Last updated: 2026-03-16 after completing 03-01-PLAN.md (setTrimStart/setTrimEnd store actions, WaveformView RegionsPlugin bidirectional sync — build passes)*
+*Last updated: 2026-03-16 after completing 03-02-PLAN.md (TrimControls numeric inputs, Shift+Arrow nudge, CSS styles — browser verification approved; Phase 3 complete)*

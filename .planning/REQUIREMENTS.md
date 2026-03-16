@@ -20,9 +20,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **WAVE-01**: App displays audio waveform visualization of the loaded file
 - [x] **WAVE-02**: User can drag start/end handles on the waveform to set trim region
-- [ ] **WAVE-03**: User can type seconds to cut from start/end via numeric inputs
+- [x] **WAVE-03**: User can type seconds to cut from start/end via numeric inputs
 - [x] **WAVE-04**: Waveform handles and numeric inputs stay in bidirectional sync
-- [ ] **WAVE-05**: User can nudge trim handles with keyboard arrow keys
+- [x] **WAVE-05**: User can nudge trim handles with keyboard arrow keys
 
 ### Output & Download
 
@@ -78,9 +78,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FMT-02 | Phase 2 | Complete |
 | WAVE-01 | Phase 2 | Complete |
 | WAVE-02 | Phase 3 | Complete |
-| WAVE-03 | Phase 3 | Pending |
+| WAVE-03 | Phase 3 | Complete |
 | WAVE-04 | Phase 3 | Complete |
-| WAVE-05 | Phase 3 | Pending |
+| WAVE-05 | Phase 3 | Complete |
 | OUT-01 | Phase 4 | Pending |
 | OUT-02 | Phase 4 | Pending |
 | OUT-03 | Phase 4 | Pending |
@@ -93,4 +93,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-16*
-*Last updated: 2026-03-16 after roadmap creation — traceability complete*
+*Last updated: 2026-03-16 after Phase 3 completion — WAVE-03, WAVE-05 marked complete*

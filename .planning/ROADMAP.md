@@ -13,7 +13,7 @@
 
 - [x] **Phase 1: Foundation** - Confirm file format, scaffold project, verify WASM runs in-browser (completed 2026-03-16)
 - [x] **Phase 2: File Load and Waveform** - User can load a file and see its audio waveform with format validation (completed 2026-03-16)
-- [ ] **Phase 3: Trim Interaction** - User can set precise trim points via draggable handles and numeric inputs
+- [x] **Phase 3: Trim Interaction** - User can set precise trim points via draggable handles and numeric inputs (completed 2026-03-16)
 - [ ] **Phase 4: Trim Execution and Download** - User can trim and download the file with size feedback
 
 ---
@@ -67,7 +67,7 @@ Plans:
 
 Plans:
 - [x] 03-01-PLAN.md — Store trim actions + WaveformView Regions plugin with bidirectional sync
-- [ ] 03-02-PLAN.md — TrimControls numeric inputs with keyboard nudge + App integration
+- [x] 03-02-PLAN.md — TrimControls numeric inputs with keyboard nudge + App integration
 
 ### Phase 4: Trim Execution and Download
 
@@ -90,7 +90,7 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete    | 2026-03-16 |
 | 2. File Load and Waveform | 2/2 | Complete    | 2026-03-16 |
-| 3. Trim Interaction | 1/2 | In progress | - |
+| 3. Trim Interaction | 2/2 | Complete    | 2026-03-16 |
 | 4. Trim Execution and Download | 0/? | Not started | - |
 
 ---
@@ -119,4 +119,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-03-16*
-*Last updated: 2026-03-16 after Phase 3 planning*
+*Last updated: 2026-03-16 after Phase 3 completion (03-02-PLAN.md complete)*
