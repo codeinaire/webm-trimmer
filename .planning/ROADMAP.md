@@ -33,8 +33,8 @@
 **Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 01-01-PLAN.md — Scaffold Vite + React + TS project with ffmpeg.wasm verified working in browser
-- [ ] 01-02-PLAN.md — Format validation spike: ffprobe on real input file, document findings
+- [x] 01-01-PLAN.md — Scaffold Vite + React + TS project with ffmpeg.wasm verified working in browser
+- [x] 01-02-PLAN.md — Format validation spike: ffprobe on real input file, document findings
 
 ### Phase 2: File Load and Waveform
 
@@ -46,7 +46,11 @@ Plans:
   2. User selects a non-audio file (e.g., a JPEG); app shows a legible error message identifying the problem
   3. User selects a file with an unexpected container; app identifies whether it is WebP or WebM and displays that information
   4. Waveform is visible and reflects the audio content of the file (amplitude variation is visible, not a flat line)
-**Plans:** TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Data layer: Zustand store, format validation utility, audio decoder service
+- [ ] 02-02-PLAN.md — UI components: FileLoader, WaveformView, App.tsx integration
 
 ### Phase 3: Trim Interaction
 
@@ -81,7 +85,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete    | 2026-03-16 |
-| 2. File Load and Waveform | 0/? | Not started | - |
+| 2. File Load and Waveform | 0/2 | Planning complete | - |
 | 3. Trim Interaction | 0/? | Not started | - |
 | 4. Trim Execution and Download | 0/? | Not started | - |
 
@@ -111,4 +115,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-03-16*
-*Last updated: 2026-03-16 after Phase 1 planning*
+*Last updated: 2026-03-16 after Phase 2 planning*
