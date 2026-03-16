@@ -49,8 +49,8 @@ Plans:
 **Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 02-01-PLAN.md — Data layer: Zustand store, format validation utility, audio decoder service
-- [ ] 02-02-PLAN.md — UI components: FileLoader, WaveformView, App.tsx integration
+- [x] 02-01-PLAN.md — Data layer: Zustand store, format validation utility, audio decoder service
+- [x] 02-02-PLAN.md — UI components: FileLoader, WaveformView, App.tsx integration
 
 ### Phase 3: Trim Interaction
 
@@ -63,7 +63,11 @@ Plans:
   3. User types a value in the "cut from end" input; the end handle moves and the trimmed region is highlighted correctly
   4. User presses the left or right arrow key while a handle is focused; the handle moves by a small fixed increment and the numeric input updates
   5. Handles and inputs cannot be set to values that would make trim-start exceed trim-end (invalid state is prevented)
-**Plans:** TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Store trim actions + WaveformView Regions plugin with bidirectional sync
+- [ ] 03-02-PLAN.md — TrimControls numeric inputs with keyboard nudge + App integration
 
 ### Phase 4: Trim Execution and Download
 
@@ -86,7 +90,7 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete    | 2026-03-16 |
 | 2. File Load and Waveform | 2/2 | Complete    | 2026-03-16 |
-| 3. Trim Interaction | 0/? | Not started | - |
+| 3. Trim Interaction | 0/2 | In progress | - |
 | 4. Trim Execution and Download | 0/? | Not started | - |
 
 ---
@@ -115,4 +119,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-03-16*
-*Last updated: 2026-03-16 after Phase 2 planning*
+*Last updated: 2026-03-16 after Phase 3 planning*
