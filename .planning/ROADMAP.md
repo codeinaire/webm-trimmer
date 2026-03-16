@@ -46,7 +46,7 @@ Plans:
   2. User selects a non-audio file (e.g., a JPEG); app shows a legible error message identifying the problem
   3. User selects a file with an unexpected container; app identifies whether it is WebP or WebM and displays that information
   4. Waveform is visible and reflects the audio content of the file (amplitude variation is visible, not a flat line)
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] 02-01-PLAN.md — Data layer: Zustand store, format validation utility, audio decoder service
@@ -85,7 +85,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete    | 2026-03-16 |
-| 2. File Load and Waveform | 0/2 | Planning complete | - |
+| 2. File Load and Waveform | 1/2 | In Progress|  |
 | 3. Trim Interaction | 0/? | Not started | - |
 | 4. Trim Execution and Download | 0/? | Not started | - |
 

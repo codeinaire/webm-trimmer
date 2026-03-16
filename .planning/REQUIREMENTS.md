@@ -9,12 +9,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Format Validation
 
-- [ ] **FMT-01**: App validates input file format and confirms whether it's WebP or WebM container
-- [ ] **FMT-02**: App shows clear error message for unsupported file types
+- [x] **FMT-01**: App validates input file format and confirms whether it's WebP or WebM container
+- [x] **FMT-02**: App shows clear error message for unsupported file types
 
 ### File Loading
 
-- [ ] **LOAD-01**: User can load a file via file picker
+- [x] **LOAD-01**: User can load a file via file picker
 
 ### Waveform & Interaction
 
@@ -73,9 +73,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | INFRA-01 | Phase 1 | Complete |
 | INFRA-02 | Phase 1 | Complete |
-| LOAD-01 | Phase 2 | Pending |
-| FMT-01 | Phase 2 | Pending |
-| FMT-02 | Phase 2 | Pending |
+| LOAD-01 | Phase 2 | Complete |
+| FMT-01 | Phase 2 | Complete |
+| FMT-02 | Phase 2 | Complete |
 | WAVE-01 | Phase 2 | Pending |
 | WAVE-02 | Phase 3 | Pending |
 | WAVE-03 | Phase 3 | Pending |
