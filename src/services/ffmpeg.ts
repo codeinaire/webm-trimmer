@@ -10,17 +10,21 @@ export async function ensureLoaded(): Promise<void> {
   if (loadPromise) return loadPromise
 
   loadPromise = (async () => {
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd'
-
     ffmpeg.on('log', ({ message }) => {
       console.log('[ffmpeg]', message)
     })
 
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-    })
-  })()
+    // Fetch from local public/ and convert to blob URLs
+    // toBlobURL is required — ffmpeg.wasm uses dynamic import() internally
+    // which needs blob: URLs to work under COEP: require-corp
+    const coreURL = await toBlobURL('/ffmpeg-core.js', 'text/javascript')
+    const wasmURL = await toBlobURL('/ffmpeg-core.wasm', 'application/wasm')
+
+    await ffmpeg.load({ coreURL, wasmURL })
+  })().catch((err) => {
+    loadPromise = null  // Reset so next call retries
+    throw err
+  })
 
   return loadPromise
 }
