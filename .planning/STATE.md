@@ -1,9 +1,9 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.0
-milestone_name: milestone
-status: complete
-last_updated: "2026-03-17T11:10:00.000Z"
+milestone_name: MVP
+status: completed
+last_updated: "2026-03-17T02:15:00.000Z"
 progress:
   total_phases: 4
   completed_phases: 4
@@ -19,114 +19,29 @@ progress:
 
 ## Project Reference
 
-**Core Value:** Users can quickly trim the duration of a WebP audio file in the browser and save a smaller version without leaving the page or uploading to a server.
-**Current Focus:** All phases complete — milestone v1.0 done
+See: .planning/PROJECT.md (updated 2026-03-17)
+
+**Core value:** Users can quickly trim the duration of a WebM audio file in the browser and save a smaller version without leaving the page or uploading to a server.
+**Current focus:** v1.0 milestone complete — planning next milestone
 
 ---
 
 ## Current Position
 
-**Phase:** 4 — Trim Execution and Download (COMPLETE)
-**Plan:** 02 complete (04-02-PLAN.md) — TrimActions UI, browser verification approved
-**Status:** All plans complete
-**Last Action:** Completed plan 04-02 — TrimActions component with trim/download flow, fixed ffmpeg.wasm ESM loading under COEP, browser verification approved
-
-### Progress Bar
-
-```
-Phase 1 [####------] 40%
-Phase 2 [##########] 100%
-Phase 3 [##########] 100%
-Phase 4 [##########] 100%
-```
-
-**Overall:** 4/4 phases complete — milestone v1.0 done
-
----
-
-## Performance Metrics
-
-| Metric | Value |
-|--------|-------|
-| Phases total | 4 |
-| Phases complete | 0 |
-| Requirements total | 14 |
-| Requirements done | 2 |
-| Plans written | 1 |
-| Plans complete | 1 |
-
----
-| Phase 01-foundation P02 | 15 | 2 tasks | 2 files |
-| Phase 02-file-load-and-waveform P01 | 10 | 2 tasks | 3 files |
-| Phase 03-trim-interaction P01 | 3 | 2 tasks | 3 files |
-| Phase 04-trim-execution-and-download P01 | 2 | 3 tasks | 6 files |
-
-## Accumulated Context
-
-### Key Decisions
-
-| Decision | Rationale | Status |
-|----------|-----------|--------|
-| Client-side only (no server) | Privacy, simplicity, no hosting costs | Confirmed in requirements |
-| Single-threaded ffmpeg.wasm core | Avoids COOP/COEP header requirement; deploys to any static host | Confirmed — @ffmpeg/core@0.12.10 installed |
-| Container format: WebM (not WebP) | ffprobe: `format_name=matroska,webm`; magic bytes `1a 45 df a3` (EBML). Input sample encoded by Chrome. Output: `.webm`, `audio/webm`. | Confirmed in Phase 1 |
-| Audio codec: Opus | ffprobe: `codec_name=opus`, 48000 Hz mono. ffmpeg flag: `-c:a libopus` | Confirmed in Phase 1 |
-| Vite 6.4.1 + React 19 + TypeScript | Vite 8 requires Node 20.19+; system has 20.16.0; Vite 6 fully functional | Confirmed in 01-01 execution |
-| @ffmpeg/util@0.12.2 (not 0.12.10) | npm registry only has util versions up to 0.12.2; plan had incorrect version | Confirmed in 01-01 execution |
-| wavesurfer.js v7 + Regions plugin | Provides drag handles out of the box; Web Audio API for waveform decode | Confirmed Phase 2 — uses load('', peaks, duration) not loadDecodedBuffer |
-| Zustand for trim state | Single source of truth prevents bidirectional sync bugs | Confirmed Phase 2 — FileLoader/WaveformView both read from useTrimStore |
-| Vite alias for wavesurfer.js regions plugin | wavesurfer.js 7.12.3 exports map references regions.esm.js/.cjs that do not exist; alias to regions.js (already ESM) bypasses broken exports | Confirmed Phase 3 — build passes |
-| isSyncingFromStore ref guard | Prevents infinite loop between region-updated event and setOptions call in bidirectional sync | Confirmed Phase 3 — pattern from research docs |
-| cutFromEnd = duration - trimEnd | User-facing "cut from end" derived from absolute trimEnd store value; converts back on onChange | Confirmed Phase 3 Plan 02 — keeps UI semantics decoupled from store |
-| Two-tier keyboard nudge | Plain arrow key (0.1s) via native step attribute; Shift+Arrow (1.0s) via custom onKeyDown handler | Confirmed Phase 3 Plan 02 |
-| vi.hoisted() for vi.mock factory | vitest hoists vi.mock above const declarations; vi.hoisted() makes variables available in factory scope | Confirmed Phase 4 Plan 01 |
-| Blob from data.buffer as ArrayBuffer | ffmpeg.readFile() returns Uint8Array<ArrayBufferLike>; extracting .buffer and casting to ArrayBuffer satisfies TypeScript BlobPart strict typing | Confirmed Phase 4 Plan 01 |
-| progressHandler as named const | Same reference passed to ffmpeg.on and ffmpeg.off prevents ghost handlers on repeated trims | Confirmed Phase 4 Plan 01 |
-
-### Critical Risks
-
-1. **Format ambiguity** — WebP spec has no audio chunks. Input files may be WebM containers mislabeled as WebP. Phase 1 must confirm with `ffprobe` on real files before any implementation.
-2. **COOP/COEP headers** — Multi-threaded WASM requires these headers; most static hosts do not set them. Use single-threaded `@ffmpeg/core` unless host is confirmed.
-3. **WASM memory leaks** — `ffmpeg.deleteFile()` must be called after every trim for both input and output files. `URL.revokeObjectURL()` must be called after download. These are correctness requirements, not polish.
-4. **Trim inaccuracy** — Use `-c:a libopus` re-encode (not `-c copy`) for sample-accurate cuts. Stream copy only cuts at keyframe boundaries.
-
-### Architecture Notes
-
-- Two-decode strategy: Web Audio API decodes for waveform display immediately; ffmpeg.wasm decodes only at trim time
-- WaveSurfer is write-only for state purposes: region events push to Zustand store; all other components read from store
-- ffmpeg service is a singleton (`src/services/ffmpeg.ts`) with `ensureLoaded` guard — CONFIRMED WORKING
-- VFS cleanup (`deleteFile`) and Blob URL cleanup (`revokeObjectURL`) are required in the trim function
-
-### Open Questions
-
-1. ~~Are input files true WebP containers with non-standard audio, or WebM containers with a `.webp` extension?~~ **RESOLVED (Phase 1):** Files are WebM containers (`matroska,webm`) with `.webm` extension. Not WebP. EBML magic bytes confirmed.
-2. Where will the app be deployed? (Affects single-threaded vs multi-threaded WASM core choice) — Local only per user constraints; single-threaded confirmed.
-3. ~~What audio codec do the input files use — Opus or Vorbis?~~ **RESOLVED (Phase 1):** Codec is `opus` (Opus Interactive Audio Codec), 48000 Hz mono, encoder=Chrome. ffmpeg flag: `-c:a libopus`.
-
-### Todos
-
-- [x] Run `ffprobe` on real input files to confirm container format — DONE: WebM/Opus confirmed
-- [ ] Decide and document production deployment target (local-only per constraints; low priority)
-- [x] Update PROJECT.md Key Decisions table after Phase 1 spike findings — DONE in Plan 01-02
-- [ ] Update OUT-01 requirement to reflect `.webm` output (files are WebM, not WebP)
-
-### Blockers
-
-None. All phases complete.
+**Milestone:** v1.0 MVP — SHIPPED 2026-03-17
+**Status:** All 4 phases, 8 plans complete. Tagged v1.0.
 
 ---
 
 ## Session Continuity
 
 **To resume work, read:**
-1. `.planning/STATE.md` (this file) — current position and context
-2. `.planning/ROADMAP.md` — phase goals and success criteria
-3. `.planning/REQUIREMENTS.md` — full requirement list with traceability
-4. `.planning/phases/01-foundation/01-01-SUMMARY.md` — plan 01 execution summary
-
-**Current phase plan location:** `.planning/phases/04-trim-execution-and-download/`
+1. `.planning/STATE.md` (this file)
+2. `.planning/PROJECT.md` — project context and validated requirements
+3. `.planning/ROADMAP.md` — milestone overview
+4. `.planning/MILESTONES.md` — shipped milestone details
 
 ---
 
 *State initialized: 2026-03-16*
-*Last updated: 2026-03-17 after completing 04-02-PLAN.md (TrimActions UI, ffmpeg ESM fix, browser verification approved — all 4 phases complete)*
+*Last updated: 2026-03-17 after v1.0 milestone completion*
