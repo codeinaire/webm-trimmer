@@ -1,5 +1,5 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg'
-import { fetchFile, toBlobURL } from '@ffmpeg/util'
+import { toBlobURL } from '@ffmpeg/util'
 
 const ffmpeg = new FFmpeg()
 
@@ -37,7 +37,8 @@ export async function trimAudio(
 ): Promise<Blob> {
   await ensureLoaded()
 
-  const inputName = `input_${Date.now()}.webm`
+  const mountDir = '/workerfs'
+  const inputPath = `${mountDir}/${file.name}`
   const outputName = `output_${Date.now()}.webm`
 
   const progressHandler = onProgress
@@ -49,12 +50,15 @@ export async function trimAudio(
   }
 
   try {
-    await ffmpeg.writeFile(inputName, await fetchFile(file))
+    // Mount input via WORKERFS to avoid copying large files into WASM memory
+    await ffmpeg.createDir(mountDir)
+    await ffmpeg.mount('WORKERFS', { files: [file] }, mountDir)
+
     await ffmpeg.exec([
       '-ss', String(trimStart),
       '-to', String(trimEnd),
-      '-i', inputName,
-      '-c:a', 'libopus',
+      '-i', inputPath,
+      '-c', 'copy',
       '-f', 'webm',
       outputName,
     ])
@@ -64,9 +68,10 @@ export async function trimAudio(
     if (progressHandler) {
       ffmpeg.off('progress', progressHandler)
     }
-    ffmpeg.deleteFile(inputName).catch(() => {})
+    ffmpeg.unmount(mountDir).catch(() => {})
+    ffmpeg.deleteDir(mountDir).catch(() => {})
     ffmpeg.deleteFile(outputName).catch(() => {})
   }
 }
 
-export { ffmpeg, fetchFile }
+export { ffmpeg }

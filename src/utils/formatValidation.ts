@@ -1,7 +1,7 @@
 const WEBM_MAGIC = [0x1a, 0x45, 0xdf, 0xa3]
 const RIFF_MAGIC = [0x52, 0x49, 0x46, 0x46]
 
-export const MAX_FILE_SIZE = 50 * 1024 * 1024 // 50 MB
+export const MAX_FILE_SIZE = 130 * 1024 * 1024 // 130 MB
 
 export type FormatCheckResult =
   | { valid: true; container: 'webm' }

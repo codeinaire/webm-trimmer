@@ -14,7 +14,7 @@ async function loadAudioFile(file: File): Promise<void> {
 
   // 2. Guard on file size
   if (file.size > MAX_FILE_SIZE) {
-    setStatus('error', 'File is too large (max 50 MB). Select a shorter recording.')
+    setStatus('error', 'File is too large (max 130 MB). Select a shorter recording.')
     return
   }
 

@@ -3,7 +3,10 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 // Use vi.hoisted to declare mocks that are referenced in vi.mock factory
 const {
   mockExec,
-  mockWriteFile,
+  mockCreateDir,
+  mockMount,
+  mockUnmount,
+  mockDeleteDir,
   mockReadFile,
   mockDeleteFile,
   mockOn,
@@ -11,7 +14,10 @@ const {
   mockLoad,
 } = vi.hoisted(() => ({
   mockExec: vi.fn().mockResolvedValue(0),
-  mockWriteFile: vi.fn().mockResolvedValue(undefined),
+  mockCreateDir: vi.fn().mockResolvedValue(undefined),
+  mockMount: vi.fn().mockResolvedValue(undefined),
+  mockUnmount: vi.fn().mockResolvedValue(undefined),
+  mockDeleteDir: vi.fn().mockResolvedValue(undefined),
   mockReadFile: vi.fn().mockResolvedValue(new Uint8Array([1, 2, 3])),
   mockDeleteFile: vi.fn().mockResolvedValue(undefined),
   mockOn: vi.fn(),
@@ -23,7 +29,10 @@ vi.mock('@ffmpeg/ffmpeg', () => ({
   FFmpeg: vi.fn().mockImplementation(() => ({
     load: mockLoad,
     exec: mockExec,
-    writeFile: mockWriteFile,
+    createDir: mockCreateDir,
+    mount: mockMount,
+    unmount: mockUnmount,
+    deleteDir: mockDeleteDir,
     readFile: mockReadFile,
     deleteFile: mockDeleteFile,
     on: mockOn,
@@ -33,7 +42,6 @@ vi.mock('@ffmpeg/ffmpeg', () => ({
 }))
 
 vi.mock('@ffmpeg/util', () => ({
-  fetchFile: vi.fn().mockResolvedValue(new Uint8Array([10, 20, 30])),
   toBlobURL: vi.fn().mockResolvedValue('blob:mock'),
 }))
 
@@ -55,11 +63,13 @@ describe('trimAudio', () => {
     expect(blob.type).toBe('audio/webm')
   })
 
-  it('calls deleteFile twice in finally block even when exec throws', async () => {
+  it('cleans up mount and output file even when exec throws', async () => {
     mockExec.mockRejectedValueOnce(new Error('exec failed'))
     const file = new File([new Uint8Array([1])], 'test.webm', { type: 'audio/webm' })
     await expect(trimAudio(file, 0, 5)).rejects.toThrow('exec failed')
-    expect(mockDeleteFile).toHaveBeenCalledTimes(2)
+    expect(mockUnmount).toHaveBeenCalledTimes(1)
+    expect(mockDeleteDir).toHaveBeenCalledTimes(1)
+    expect(mockDeleteFile).toHaveBeenCalledTimes(1)
   })
 
   it('calls ffmpeg.off in finally block when onProgress was provided', async () => {
@@ -83,11 +93,13 @@ describe('trimAudio', () => {
     expect(mockOff).not.toHaveBeenCalled()
   })
 
-  it('calls exec with correct ffmpeg arguments including -ss, -to, -c:a libopus, -f webm', async () => {
+  it('mounts input via WORKERFS and calls exec with correct ffmpeg arguments', async () => {
     const file = new File([new Uint8Array([1])], 'test.webm', { type: 'audio/webm' })
     await trimAudio(file, 1.5, 4.2)
+    expect(mockCreateDir).toHaveBeenCalledWith('/workerfs')
+    expect(mockMount).toHaveBeenCalledWith('WORKERFS', { files: [file] }, '/workerfs')
     expect(mockExec).toHaveBeenCalledWith(
-      expect.arrayContaining(['-ss', '1.5', '-to', '4.2', '-c:a', 'libopus', '-f', 'webm']),
+      expect.arrayContaining(['-ss', '1.5', '-to', '4.2', '-i', '/workerfs/test.webm', '-c', 'copy', '-f', 'webm']),
     )
   })
 })
